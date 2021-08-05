@@ -1,6 +1,8 @@
 function optionChanged(option) {
     if(option == 'Individual Name' || !data) {
-        svg.selectAll("*").remove();
+        clearBarChart();
+        clearBubbleChart();
+        clearMeta();    
         return;
     }
     var individualSampleList = data.samples.filter(sample => sample.id == option);
@@ -155,4 +157,18 @@ function renderMetadata(metadata) {
     Object.entries(metadata).forEach(entry => {
         sampleMetadata.append("p").text(entry[0] + ": " + entry[1]);
     })
+}
+
+function clearMeta() {
+    var sampleMetadata = d3.select("#sample-metadata");
+    sampleMetadata.html("");
+}
+
+function clearBarChart() {
+    svg.selectAll("*").remove();
+}
+
+function clearBubbleChart() {
+    var bubbleChart = d3.select("#bubble");
+    bubbleChart.html("");
 }
